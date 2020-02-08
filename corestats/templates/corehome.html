@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% load static %} {% block page_title %} BLDXSPRT | Home {% endblock %} {% block content %}
+
+<div class="row">
+    <div class="col-12 text-center">
+        <h1 class="main-title">BLDXSPRT</h1>
+        <hr>
+    </div>
+</div>
+
+<div class="row body-text">
+    <div class="col-12">
+        <p class="lead text-center">BASE HOME</p>
+    </div>
+</div>
+
+<div class="row body-text">
+    <div class="col-md-6 col-12">
+        <h2 class="text-center mb-2">Chars:</h2>
+        <a href="{% url 'new_base' %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Add Base!</a> {% for c in chars %}
+        <h3>Name: {{ c.name }}</h3>
+        {% endfor %}
+    </div>
+    <div class="col-md-6 col-12"></div>
+</div>
+
+
+
+
+
+
+{% endblock %}
