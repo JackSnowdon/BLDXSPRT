@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, reverse, get_object_or_404
 from .models import *
 from .forms import *
 
@@ -20,7 +20,6 @@ def new_base(request):
         if base_form.is_valid():
             base = base_form.save(commit=False)
             base.heart = 0
-
             strengh = int(request.POST.get('strengh'))
             speed = int(request.POST.get('speed'))
             social = int(request.POST.get('social'))
@@ -32,7 +31,7 @@ def new_base(request):
             if stat_total > 100:
                 messages.error(request, 'Invalid Stats for {0}, stat total ({1}) greater than 100'.format(base.name, stat_total), extra_tags='alert')
             else:
-                base.base_hp = strengh * (dex * speed)
+                base.base_hp = strengh * (dex + speed)
                 base.save()
                 messages.error(request, 'Added {0}'.format(base.name), extra_tags='alert')
                 return redirect("corehome")
@@ -41,3 +40,13 @@ def new_base(request):
         base_form = NewBaseForm()
     return render(request, "new_base.html", {"base_form": base_form })
 
+def view_base(request, pk):
+    base = get_object_or_404(BaseModel, id=pk)
+    return render(request, "view_base.html", {"base": base })
+
+
+def delete_base(request, pk):
+    base = get_object_or_404(BaseModel, id=pk)
+    messages.error(request, 'Deleted {0}'.format(base.name), extra_tags='alert')
+    base.delete()
+    return redirect(reverse('corehome'))
