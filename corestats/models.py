@@ -16,4 +16,15 @@ class BaseModel(models.Model):
     def __str__(self):
         return self.name
 
+class Combatant(models.Model):
+    base = models.OneToOneField(
+        BaseModel,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    current_hp = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(5000)])
+    
+    def __str__(self):
+        return self.base.name
+
 

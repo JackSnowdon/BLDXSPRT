@@ -10,4 +10,15 @@ class NewBaseForm(forms.ModelForm):
         labels = {
             "dex": "Dexterity",
         }
+
+
+class AddToCombat(forms.ModelForm):
+
+    class Meta:
+        model = Combatant
+        fields = '__all__'
+        labels = {
+            "base": "Combatant",
+            "current_hp": "Current HP"
+        }
         

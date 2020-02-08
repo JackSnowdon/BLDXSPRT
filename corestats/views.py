@@ -50,3 +50,28 @@ def delete_base(request, pk):
     messages.error(request, 'Deleted {0}'.format(base.name), extra_tags='alert')
     base.delete()
     return redirect(reverse('corehome'))
+
+
+def setup_fight(request):
+    fighters = Combatant.objects.all()
+    print(fighters)
+    return render(request, "setup_fight.html", {"fighters": fighters })
+
+
+def new_combatant(request):
+    if request.method == "POST":
+        combatant_form = AddToCombat(request.POST)
+        if combatant_form.is_valid():
+            current_hp = int(request.POST.get('current_hp'))
+            pk = request.POST.get('base')
+            combatant = get_object_or_404(BaseModel, pk=pk)
+            maxhp = combatant.base_hp
+            if current_hp <= maxhp:
+                combatant_form.save()
+                messages.error(request, 'Added {0} to combat'.format(combatant.name), extra_tags='alert boldest')
+                return redirect(reverse('setup_fight'))
+            else:
+                messages.warning(request, 'Your current HP can not exceed your Max HP! ({0} HP)'.format(maxhp), extra_tags='alert')
+    else:
+        combatant_form = AddToCombat()
+    return render(request, 'new_combatant.html', {'combatant_form': combatant_form })
