@@ -40,6 +40,7 @@ def new_base(request):
         base_form = NewBaseForm()
     return render(request, "new_base.html", {"base_form": base_form })
 
+
 def view_base(request, pk):
     base = get_object_or_404(BaseModel, id=pk)
     return render(request, "view_base.html", {"base": base })
@@ -54,7 +55,6 @@ def delete_base(request, pk):
 
 def setup_fight(request):
     fighters = Combatant.objects.all()
-    print(fighters)
     return render(request, "setup_fight.html", {"fighters": fighters })
 
 

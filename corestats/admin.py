@@ -5,3 +5,4 @@ from .models import *
 
 admin.site.register(BaseModel)
 admin.site.register(Combatant)
+admin.site.register(FightStat)

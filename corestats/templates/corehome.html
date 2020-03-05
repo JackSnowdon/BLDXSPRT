@@ -18,8 +18,8 @@
         <h2 class="text-center mb-2">Chars:</h2>
         <a href="{% url 'new_base' %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Add Base!</a> {% for c in chars %}
         <h3>Name: {{ c.name }}</h3>
-        <a href="{% url 'delete_base' c.id %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Delete</a>
-        <a href="{% url 'view_base' c.id %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Stats</a> {% endfor %}
+        <a href="{% url 'view_base' c.id %}" role="button" class="btn btn-success mb-3" aria-disabled="false">Stats</a>
+        <a href="{% url 'delete_base' c.id %}" role="button" class="btn btn-danger mb-3" aria-disabled="false">Delete</a> {% endfor %}
     </div>
     <div class="col-md-6 col-12">
         <h2 class="text-center mb-2">Fights:</h2>

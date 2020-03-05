@@ -15,10 +15,16 @@
 
 
 <div class="row body-text">
-    <div class="col-md-6 col-12">
+    <div class="col-md-6 col-12 text-center">
         <h2 class="text-center mb-2">Fighters:</h2>
-        <a href="{% url 'new_combatant' %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Add Fighter!</a> {% for f in fighters %}
-        <h3>Name: {{ f.base.name }} </h3> {% endfor %}
+        <a href="{% url 'new_combatant' %}" role="button" class="btn btn-warning mb-3" aria-disabled="false">Add Fighter!</a>
+        <div class="row text-left">
+            {% for f in fighters %}
+            <div class="col-12">
+                <h3>- {{ f.base.name }}</h3>
+            </div>
+            {% endfor %}
+        </div>
     </div>
     <div class="col-md-6 col-12">
     </div>

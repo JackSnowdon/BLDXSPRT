@@ -28,3 +28,11 @@ class Combatant(models.Model):
         return self.base.name
 
 
+class FightStat(models.Model):
+    fight_name = models.CharField(max_length=50)
+    fighter_limit = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(20)])
+    fighters = models.ManyToManyField('Combatant')
+
+    def __str__(self):
+        return self.fight_name
+
